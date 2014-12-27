@@ -1,0 +1,121 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+/* line 1, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+html {
+  box-sizing: border-box;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 8, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* line 12, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+body {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #DADADA;
+  background-color: #252525;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+/* line 23, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+p {
+  margin-bottom: 1.3em;
+  font-weight: 100;
+}
+
+/* line 28, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+em {
+  font-style: italic;
+}
+
+/* line 32, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+strong {
+  font-weight: bold;
+}
+
+/* line 36, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+ul {
+  padding-left: 1.5em;
+  margin-bottom: 1.3em;
+}
+
+/* line 41, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+li {
+  font-weight: 100;
+  line-height: 1.5;
+  list-style-type: circle;
+}
+
+/* line 47, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h1, h2, h3, h4 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+}
+
+/* line 53, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h1 {
+  margin-top: 0;
+  font-size: 3.998em;
+}
+
+/* line 58, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h2 {
+  font-size: 2.827em;
+}
+
+/* line 60, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h3 {
+  font-size: 1.999em;
+}
+
+/* line 62, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h4 {
+  font-size: 1.414em;
+}
+
+/* line 64, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+small, .font_small {
+  font-size: 0.707em;
+}
+
+/* line 66, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+h1, h2, h3, h4 {
+  color: #FAFAFA;
+}
+
+/* line 70, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+.content {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 3em 4em;
+  background-color: #151515;
+}
+
+/* line 77, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+.center {
+  text-align: center;
+}
+
+/* line 81, /Volumes/Actual/Proyectos/chupo_rails/app/assets/stylesheets/main.scss */
+.like-bar {
+  margin-bottom: 1.5em;
+}
