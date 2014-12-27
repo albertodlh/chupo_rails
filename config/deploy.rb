@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
+set :rake, 'bundle exec rake'
+
 set :application, 'chupo_rails'
 set :repo_url, 'git@github.com:albertodlh/chupo_rails.git'
 
@@ -10,6 +12,12 @@ set :repo_url, 'git@github.com:albertodlh/chupo_rails.git'
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/albertodlh/webapps/chupo_rails'
 set :tmp_dir, '/home/albertodlh/tmp'
+
+set :default_env, {
+  'PATH' => "#{deploy_to}/bin:$PATH",
+  'GEM_HOME' => "#{deploy_to}/gems",
+  'RUBYLIB' => "#{deploy_to}/lib"
+}
 
 # Default value for :scm is :git
 # set :scm, :git
