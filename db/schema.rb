@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141227172121) do
+ActiveRecord::Schema.define(version: 20141227215528) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",      default: "", null: false
@@ -19,9 +19,17 @@ ActiveRecord::Schema.define(version: 20141227172121) do
     t.datetime "pubdate"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "tag",        default: "", null: false
   end
 
   add_index "articles", ["pubdate"], name: "index_articles_on_pubdate"
   add_index "articles", ["title"], name: "index_articles_on_title"
+
+  create_table "videos", force: :cascade do |t|
+    t.string   "title",      default: "", null: false
+    t.string   "youtube_id", default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
 end

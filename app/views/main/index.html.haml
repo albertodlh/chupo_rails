@@ -1,11 +1,30 @@
 .content
-  / Random text: Locura locura locura du agaaaa!
-  %h1= @article ? @article.title : "...¡Y Botó el Chupo!"
+  %h1= @main_article ? @main_article.title : "...¡Y Botó el Chupo!"
   .fb-like.like-bar{"data-href" => "http://www.botoelchupo.com", "data-action" => "like", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
-  - if @article
-    = raw @article.content
+  - if @main_article
+    = raw @main_article.content
   - else
     %p
       Esta es una página acerca de
       %strong botar el chupo.
       Actualmente no tiene contenido, pero ¡gracias por visitar!
+
+  - unless @videos.blank?
+    %h3= @video_article ? @video_article.title : "Video"
+    - if @video_article
+      = raw @video_article.content
+    - else
+      %p Videos de personas botando el chupo:
+
+    .center
+      - @videos.each do |video|
+        %h4.title-link
+          %a{href: "http://www.youtube.com/watch?v=#{video.youtube_id}"}
+            = video.title
+        %iframe{:allowfullscreen => true, :frameborder => "0", :width => "480", :height => "360", :src => "//www.youtube.com/embed/#{video.youtube_id}"}
+
+  - if @extra_article
+    %h3= @extra_article.title
+    = raw @extra_article.content
+
+

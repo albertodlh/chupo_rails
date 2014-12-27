@@ -81,3 +81,15 @@ h1, h2, h3, h4{
 .like-bar{
   margin-bottom: 1.5em;
 }
+
+h4.title-link{
+  margin-bottom: 1em;
+  a{
+    text-decoration: none;
+    color: inherit;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
