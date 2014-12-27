@@ -1,6 +1,8 @@
 html{
   box-sizing: border-box;
   font-size: 1em;
+  margin: 0;
+  padding: 0;
 }
 
 *, *:before, *:after {
@@ -12,6 +14,8 @@ body{
   color: #DADADA;
   background-color: #252525;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
 }
 
 /* Typography */
