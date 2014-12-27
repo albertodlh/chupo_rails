@@ -1,0 +1,55 @@
+!!!
+%html{lang: 'es'}
+  %head
+    %title Botó el Chupo
+
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "Lorem De Jesús Ipsum Rodriguez III", :name => "author"}/
+    %meta{:content => "¡Ven y conoce una página que no es acerca de absolutamente nada aparte de explicar qué significa la expresión botar el chupo!", :name => "description"}/
+    %meta{:content => "Botar el Chupo, Botó el Chupo, Chupo, Chinchurria, Changua, Tetero, Tratado de las ideas estéticas de España", :name => "keywords"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:content => "INDEX,FOLLOW", :name => "robots"}/
+
+    / MICRODATA META TAGS:
+    %meta{:content => "Botó el Chupo", :itemprop => "name"}
+    %meta{:content => "¡Ven y conoce una página que no es acerca de absolutamente nada aparte de explicar qué significa la expresión botar el chupo!", :itemprop => "description"}
+    %meta{:content => "http://www.botoelchupo.com/assets/images/chupo.jpg", :itemprop => "image"}/
+
+    / OPEN GRAPH META TAGS:
+    %meta{:content => "Botó el Chupo", :property => "og:title"}/
+    %meta{:content => "¡Ven y conoce una página que no es acerca de absolutamente nada aparte de explicar qué significa la expresión botar el chupo!", :property => "og:description"}/
+    %meta{:content => "http://www.botoelchupo.com/assets/images/chupo.jpg", :property => "og:image"}/
+    %meta{:content => "website", :property => "og:type"}/
+    %meta{:content => "http://www.botoelchupo.com/", :property => "og:url"}/
+    %meta{:content => "BotoElChupo", :property => "og:site_name"}/
+    %meta{:content => "590875022", :property => "fb:admins"}/
+
+    %link{:href => "http://www.botoelchupo.com/", :rel => "canonical"}/
+
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700", :rel => "stylesheet", :type => "text/css"}
+
+    / HTML5 Shim
+    / [if lt IE 9]
+      %script{:src => "http://html5shim.googlecode.com/svn/trunk/html5.js"}
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    :javascript
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1524776817798497',
+          xfbml      : true,
+          version    : 'v2.2'
+        });
+      };
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_LA/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+    = yield
