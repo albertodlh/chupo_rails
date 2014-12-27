@@ -45,17 +45,23 @@ set :default_env, {
 
 desc "Restart nginx"
 task :restart do
-  run "#{deploy_to}/bin/restart"
+  on roles(:web) do
+    execute "#{deploy_to}/bin/restart"
+  end
 end
 
 desc "Start nginx"
 task :start do
-  run "#{deploy_to}/bin/start"
+  on roles(:web) do
+    execute "#{deploy_to}/bin/start"
+  end
 end
 
 desc "Stop nginx"
 task :stop do
-  run "#{deploy_to}/bin/stop"
+  on roles(:web) do
+    execute "#{deploy_to}/bin/stop"
+  end
 end
 
 namespace :deploy do
