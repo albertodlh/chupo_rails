@@ -43,16 +43,44 @@ set :default_env, {
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+desc "Restart nginx"
+task :restart do
+  run "#{deploy_to}/bin/restart"
+end
+
+desc "Start nginx"
+task :start do
+  run "#{deploy_to}/bin/start"
+end
+
+desc "Stop nginx"
+task :stop do
+  run "#{deploy_to}/bin/stop"
+end
+
 namespace :deploy do
+  puts "===================================================\n"
+  puts "         (  )   (   )  )"
+  puts "      ) (   )  (  (         GO GRAB SOME COFFEE"
+  puts "      ( )  (    ) )\n"
+  puts "     <_____________> ___    CAPISTRANO IS ROCKING!"
+  puts "     |             |/ _ \\"
+  puts "     |               | | |"
+  puts "     |               |_| |"
+  puts "  ___|             |\\___/"
+  puts " /    \\___________/    \\"
+  puts " \\_____________________/ \n"
+  puts "==================================================="
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      capture("#{deploy_to}/bin/restart")
+      # capture("#{deploy_to}/bin/restart")
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
     end
   end
-
 end
+
+after "deploy", "restart"
