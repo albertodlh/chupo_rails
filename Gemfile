@@ -36,6 +36,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'therubyracer'
 gem 'rails_admin'
+gem 'twitter'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,5 +48,9 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'capistrano-rails', '~> 1.1.1'
+end
+
+group :production do
+  gem 'pg', '~> 0.17.1'
 end
 

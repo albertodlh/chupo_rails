@@ -21,5 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: "~/webapps/chupo_static_media/db/production.sqlite3"
+#  <<: *default
+#  database: "~/webapps/chupo_static_media/db/production.sqlite3"
+  adapter: postgresql
+  database: chupodb
+  host: localhost
+  username: chupodb
+  password: Slvmdpylvas55
