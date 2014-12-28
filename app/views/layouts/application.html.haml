@@ -36,7 +36,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-    = render "shared/analytics"
+    -#= render "shared/analytics"
   %body
+    = render "shared/google_tag_mgr"
     = render "shared/facebook_api"
     = yield
