@@ -1,6 +1,8 @@
 .content
   %h1= @main_article ? @main_article.title : "...¡Y Botó el Chupo!"
-  .fb-like.like-bar{"data-href" => "http://www.botoelchupo.com", "data-action" => "like", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+  .fb-like.like-bar{"data-href" => "http://botoelchupo.com", "data-action" => "like", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+  .g-plusone.like-bar{"data-href" => "http://botoelchupo.com", "data-annotation" => "inline", "data-size" => "tall", "data-width" => "450"}
+
   - if @main_article
     = raw @main_article.content
   - else
@@ -22,6 +24,25 @@
           %a{href: "http://www.youtube.com/watch?v=#{video.youtube_id}"}
             = video.title
         %iframe{:allowfullscreen => true, :frameborder => "0", :width => "480", :height => "360", :src => "//www.youtube.com/embed/#{video.youtube_id}"}
+
+  - unless @tweets.blank?
+    %h3= @twitter_article ? @twitter_article.title : "Twitter"
+    - if @twitter_article
+      = raw @twitter_article.content
+    - else
+      %p Tweets de personas acerca de botar el chupo:
+
+    .tweets
+      - @tweets.each do |tweet|
+        .tweet
+          - unless tweet[:avatar].blank?
+            = image_tag(tweet[:avatar], size: "48x48", alt: tweet[:username])
+          .tweet__text
+            %h5.twitter-user
+              %a{href: "https://twitter.com/#{tweet[:username]}"}
+                = "#{tweet[:name]} (#{tweet[:username]})"
+            .font_small
+              %p= raw auto_link(tweet[:text].gsub(/\n/, '<br />'))
 
   - if @extra_article
     %h3= @extra_article.title

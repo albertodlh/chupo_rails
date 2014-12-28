@@ -20,11 +20,11 @@
     %meta{:content => "¡Ven y conoce una página que no es acerca de absolutamente nada aparte de explicar qué significa la expresión botar el chupo!", :property => "og:description"}/
     %meta{:content => "http://static.botoelchupo.com/media/botoelchupo.jpg", :property => "og:image"}/
     %meta{:content => "website", :property => "og:type"}/
-    %meta{:content => "http://www.botoelchupo.com/", :property => "og:url"}/
+    %meta{:content => "http://botoelchupo.com/", :property => "og:url"}/
     %meta{:content => "BotoElChupo", :property => "og:site_name"}/
     %meta{:content => "590875022", :property => "fb:admins"}/
 
-    %link{:href => "http://www.botoelchupo.com/", :rel => "canonical"}/
+    %link{:href => "http://botoelchupo.com/", :rel => "canonical"}/
 
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700", :rel => "stylesheet", :type => "text/css"}
 
@@ -35,8 +35,8 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-
     -#= render "shared/analytics"
+    = render "shared/google_api"
   %body
     = render "shared/google_tag_mgr"
     = render "shared/facebook_api"
