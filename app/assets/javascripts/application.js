@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require handlebars
 //= require turbolinks
 //= require main
+//= require_tree ./templates
 // require_tree .

@@ -46,15 +46,15 @@
 
 
   .comments
-  %h3 Comentarios
-  %p ¡Bota el chupo tu también!
-  = form_for :comment, url: "#", html:{id: "miforma"} do |f|
-    %p= f.text_field :user
-    %p= f.text_field :email
-    %p= f.text_field :website
-    %p
-      = f.text_area :content
-    %p= f.submit
+    %h3 Comentarios
+    %p ¡Bota el chupo tu también!
+    = form_for :comment, url: "#", html:{id: "miforma"} do |f|
+      %p= f.text_field :user
+      %p= f.text_field :email
+      %p= f.text_field :website
+      %p
+        = f.text_area :content
+      %p= f.submit
 
 
   - if @extra_article

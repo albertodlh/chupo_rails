@@ -9,6 +9,9 @@ class MainController < ActionController::Base
     @videos = Video.all
   end
 
+  def test
+  end
+
   private
     def get_tweets(search_string, count)
       client = Twitter::REST::Client.new do |config|

@@ -4,39 +4,51 @@ setUpAjax = ->
     beforeSend: (xhr) ->
       xhr.setRequestHeader('X-CSRF-Token', token)
 
-getComments = ->
-  $.getJSON "/api/comments/", (data) ->
-    console.log data
+Comments = () ->
+  endpoint = '/api/comments/'
+  template = 'test'
+  comments = []
 
-saveCommentAnt = (callback) ->
-  params =
-    comment:
-      user: "Alberto"
-      email: "albertodlh@gmail.com"
-      content: "Nada"
-      website: "concha"
-
-  $.post "/api/comments/", params, (data) ->
-    if data == 'success'
+  @getList = (callback) ->
+    $.getJSON endpoint, (data) ->
+      comments = data
       callback()
-    else
-      console.log data
 
-saveComment = (params, callback) ->
-  $.post "/api/comments/", params, (data) ->
-    if data == 'success'
-      callback()
-    else
-      console.log data
+  @add = (params, callback) ->
+    $.post endpoint, params, (data) ->
+      if data == 'success'
+        @getList callback
+      else
+        console.log data
+
+  @appendTo = (containerId) ->
+    console.log comments
+    elem = HandlebarsTemplates[template]({comments: comments})
+    $(elem).appendTo(containerId)
+
+  return false
 
 $(()->
-  #setUpAjax()
-  #saveComment(getComments)
+  comMgr = new Comments()
+  comMgr.getList ()->
+    comMgr.appendTo('#container')
 
   $("#miforma").on "submit", (evt) ->
     evt.preventDefault()
-    saveComment $(this).serialize(), getComments
-    #console.log $(this).serialize()
+    comMgr.add $(this).serialize(), ()->
+      comMgr.appendTo('#container')
 )
+
+
+
+
+
+
+
+
+
+
+
+
 
 

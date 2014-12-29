@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'main#index'
+  #root 'main#index'
+  root 'main#test'
   #get 'twitter' => 'main#twitter'
 
   namespace :api do
