@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141227215528) do
+ActiveRecord::Schema.define(version: 20141228234642) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",      default: "", null: false
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 20141227215528) do
 
   add_index "articles", ["pubdate"], name: "index_articles_on_pubdate"
   add_index "articles", ["title"], name: "index_articles_on_title"
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "user",       default: "Chupo", null: false
+    t.string   "email",      default: "",      null: false
+    t.string   "website",    default: "",      null: false
+    t.text     "content",    default: "",      null: false
+    t.datetime "pubdate"
+    t.string   "status",     default: "P",     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "gravatar",   default: "",      null: false
+  end
+
+  add_index "comments", ["email"], name: "index_comments_on_email"
+  add_index "comments", ["user"], name: "index_comments_on_user"
 
   create_table "videos", force: :cascade do |t|
     t.string   "title",      default: "", null: false

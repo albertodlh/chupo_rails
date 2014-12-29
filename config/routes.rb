@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   root 'main#index'
   #get 'twitter' => 'main#twitter'
 
+  namespace :api do
+    resources :comments
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

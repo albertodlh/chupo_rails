@@ -1,0 +1,13 @@
+%h1 hola!
+
+= form_for :comment, url: "#" do |f|
+  %p
+    = f.label :user
+    %br
+    = f.text_field :user
+  %p
+    = f.label :content
+    %br
+    = f.text_area :content
+  %p
+    = f.submit
