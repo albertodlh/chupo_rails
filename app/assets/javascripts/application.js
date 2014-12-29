@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require handlebars
 //= require turbolinks
-//= require main
+//= require vendor/simpl
+//= require chupo
 //= require_tree ./templates
+//= require_tree ./managers
+//= require main
 // require_tree .

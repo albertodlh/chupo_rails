@@ -1,42 +1,20 @@
-setUpAjax = ->
+###setUpAjax = ->
   token = $('meta[name="csrf-token"]').attr('content')
   $.ajaxSetup
     beforeSend: (xhr) ->
-      xhr.setRequestHeader('X-CSRF-Token', token)
-
-Comments = () ->
-  endpoint = '/api/comments/'
-  template = 'test'
-  comments = []
-
-  @getList = (callback) ->
-    $.getJSON endpoint, (data) ->
-      comments = data
-      callback()
-
-  @add = (params, callback) ->
-    $.post endpoint, params, (data) ->
-      if data == 'success'
-        @getList callback
-      else
-        console.log data
-
-  @appendTo = (containerId) ->
-    console.log comments
-    elem = HandlebarsTemplates[template]({comments: comments})
-    $(elem).appendTo(containerId)
-
-  return false
+      xhr.setRequestHeader('X-CSRF-Token', token)###
 
 $(()->
-  comMgr = new Comments()
-  comMgr.getList ()->
-    comMgr.appendTo('#container')
+  comMgr = new Chupo.Managers.Comments()
+
+  comMgr.fetch ()->
+    comMgr.showIn('#container')
 
   $("#miforma").on "submit", (evt) ->
     evt.preventDefault()
     comMgr.add $(this).serialize(), ()->
-      comMgr.appendTo('#container')
+      comMgr.fetch ()->
+        comMgr.showIn('#container')
 )
 
 
