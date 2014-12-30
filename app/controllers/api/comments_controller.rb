@@ -1,9 +1,9 @@
 class Api::CommentsController < ApplicationController
   def index
     if params[:limit]
-      @comments = Comment.all.order(:pubdate).limit(params[:limit])
+      @comments = Comment.all.order(pubdate: :desc).limit(params[:limit])
     else
-      @comments = Comment.all.order(:pubdate)
+      @comments = Comment.all.order(pubdate: :desc)
     end
     render json: @comments
   end
@@ -25,7 +25,7 @@ class Api::CommentsController < ApplicationController
     else
       errorlist = ""
       @comment.errors.full_messages.each do |msg|
-        errorlist += msg
+        errorlist += msg + " - "
       end
       render plain: errorlist
     end

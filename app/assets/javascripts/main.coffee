@@ -8,13 +8,18 @@ $(()->
   comMgr = new Chupo.Managers.Comments()
 
   comMgr.fetch ()->
-    comMgr.showIn('#container')
+    comMgr.showIn('#js-comments.comments')
 
-  $("#miforma").on "submit", (evt) ->
+  $("#js-comment-form").on "submit", (evt) ->
     evt.preventDefault()
-    comMgr.add $(this).serialize(), ()->
-      comMgr.fetch ()->
-        comMgr.showIn('#container')
+    success = false
+    comMgr.add $(this).serialize(), success, ()->
+      if success
+        comMgr.fetch ()->
+          comMgr.showIn('#js-comments.comments')
+      else
+        alert(comMgr.lastError())
+
 )
 
 

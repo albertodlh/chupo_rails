@@ -1,6 +1,19 @@
-<div class="test">
-  {{#each this}}
-    <p>{{user}}</p>
-    <p>{{content}}</p>
-  {{/each}}
-</div>
+{{#each this}}
+  <div class="comment">
+    <img alt="{{user}}" src="{{gravatar}}" width="48" height="48">
+    <div class="comment__text">
+      <h5 class="page-user">
+        {{#if website}}
+          <a href="{{website}}">
+            {{user}}
+          </a>
+        {{else}}
+          {{user}}
+        {{/if}}
+      </h5>
+      <div class="font_small">
+        <p>{{content}}</p>
+      </div>
+    </div>
+  </div>
+{{/each}}

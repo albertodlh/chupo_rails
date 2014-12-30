@@ -5,6 +5,7 @@ class MainController < ActionController::Base
     @video_article = Article.find_by(tag: "video")
     @extra_article = Article.find_by(tag: "extra")
     @twitter_article = Article.find_by(tag: "twitter")
+    @comment_article = Article.find_by(tag: "comment")
     @tweets = get_tweets("boto el chupo -rt", 10)
     @videos = Video.all
   end
