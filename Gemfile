@@ -39,6 +39,9 @@ gem 'rails_admin'
 gem 'twitter'
 gem 'rails_autolink'
 gem 'handlebars_assets'
+gem 'parsley-rails'
+gem 'momentjs-rails'
+gem 'htmlentities'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

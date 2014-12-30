@@ -40,7 +40,9 @@
           .comment__text
             %h5.page-user
               %a{href: "https://twitter.com/#{tweet[:username]}"}
-                = "#{tweet[:name]} (#{tweet[:username]})"
+                = "#{tweet[:name]} - @#{tweet[:username]} - "
+                %span.js-twitter-date
+                  = tweet[:pubdate]
             .font_small
               %p= raw auto_link(tweet[:text].gsub(/\n/, '<br />'))
 
@@ -53,16 +55,16 @@
     = form_for :comment, url: "#", html:{id: "js-comment-form", class: "form"} do |f|
       .form-group
         = f.label :user, "Nombre"
-        = f.text_field :user, placeholder: "¿Cómo se llama tu nombre?"
+        = f.text_field :user, placeholder: "¿Cómo se llama tu nombre?", 'data-parsley-required' => 'true'
       .form-group
         = f.label :email, "Email"
-        = f.text_field :email, placeholder: "Opcional. Por si quieres mostrar tu Gravatar."
+        = f.text_field :email, placeholder: "Opcional. Por si quieres mostrar tu Gravatar.", 'data-parsley-type' => 'email', 'data-parsley-trigger' => 'change'
       .form-group
         = f.label :website
-        = f.text_field :website, placeholder: "Opcional. Por si tienes página."
+        = f.text_field :website, placeholder: "Opcional. Por si tienes página.", 'data-parsley-type' => 'url', 'data-parsley-trigger' => 'change'
       .form-group
         = f.label :content, class: "hidden"
-        = f.text_area :content, placeholder: "Escribe aquí tu comentario."
+        = f.text_area :content, placeholder: "Escribe aquí tu comentario.", 'data-parsley-required' => 'true'
       .form-group.center
         = f.submit "Guardar Comentario"
     #js-comments.comments

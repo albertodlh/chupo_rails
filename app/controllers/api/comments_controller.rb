@@ -18,16 +18,19 @@ class Api::CommentsController < ApplicationController
   #end
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      render plain: 'success'
-      #redirect_to @comment
-    else
-      errorlist = ""
-      @comment.errors.full_messages.each do |msg|
-        errorlist += msg + " - "
+    if (params[:comment][:email] != 'albertodlh@gmail.com')
+      @comment = Comment.new(comment_params)
+      if @comment.save
+        render plain: 'success'
+      else
+        errorlist = ""
+        @comment.errors.full_messages.each do |msg|
+          errorlist += msg + " - "
+        end
+        render plain: errorlist
       end
-      render plain: errorlist
+    else
+      render plain: "That's not really your email address, is it? -.-"
     end
   end
 

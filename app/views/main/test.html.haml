@@ -1,11 +1,17 @@
 .content
-  .comments
-    %h3 Test
-    = form_for :comment, url: "#", html:{id: "miforma"} do |f|
-      %p= f.text_field :user
-      %p= f.text_field :email
-      %p= f.text_field :website
-      %p
-        = f.text_area :content
-      %p= f.submit
-  #container
+  = form_for :comment, url: "#", html:{id: "js-comment-form", class: "form"} do |f|
+    .form-group
+      = f.label :user, "Nombre"
+      = f.text_field :user, placeholder: "¿Cómo se llama tu nombre?", 'data-parsley-required' => 'true'
+    .form-group
+      = f.label :email, "Email"
+      = f.text_field :email, placeholder: "Opcional. Por si quieres mostrar tu Gravatar.", 'data-parsley-type' => 'email', 'data-parsley-trigger' => 'change'
+    .form-group
+      = f.label :website
+      = f.text_field :website, placeholder: "Opcional. Por si tienes página.", 'data-parsley-type' => 'url', 'data-parsley-trigger' => 'change'
+    .form-group
+      = f.label :content, class: "hidden"
+      = f.text_area :content, placeholder: "Escribe aquí tu comentario.", 'data-parsley-required' => 'true'
+    .form-group.center
+      = f.submit "Guardar Comentario"
+  #js-comments.comments

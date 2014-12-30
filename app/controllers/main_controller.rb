@@ -29,7 +29,7 @@ class MainController < ActionController::Base
           username: api_tweet.user.screen_name,
           avatar: api_tweet.user.profile_image_url.to_s, #.sub(/_normal./, '.')
           location: api_tweet.user.location,
-          date: api_tweet.created_at,
+          pubdate: api_tweet.created_at,
           text: api_tweet.text
         }
       end

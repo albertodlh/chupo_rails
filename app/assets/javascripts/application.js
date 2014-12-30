@@ -12,9 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require parsley
+//= require parsley.i18n.es
+//= require moment
+//= require moment/es
 //= require handlebars
 //= require turbolinks
-//= require vendor/simpl
+//= require vendor/simpl/simpl
+//= require vendor/handlebars/helpers
 //= require chupo
 //= require_tree ./templates
 //= require_tree ./managers
