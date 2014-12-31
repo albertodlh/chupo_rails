@@ -11,6 +11,7 @@ class Chupo.Managers.Comments extends SimPL.Manager
     super item
 
   beforeSave: (item) ->
-    item.website = 'http://hotmail.com'
+    if item.website isnt '' and not item.website.includes(/^https?:\/\//)
+      item.website = 'http://' + item.website
 
 

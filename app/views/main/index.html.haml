@@ -40,9 +40,10 @@
           .comment__text
             %h5.page-user
               %a{href: "https://twitter.com/#{tweet[:username]}"}
-                = "#{tweet[:name]} - @#{tweet[:username]} - "
-                %span.js-twitter-date
-                  = tweet[:pubdate]
+                = "#{tweet[:name]} (@#{tweet[:username]})"
+              %span.js-twitter-date.comment__date
+                -
+                = tweet[:pubdate]
             .font_small
               %p= raw auto_link(tweet[:text].gsub(/\n/, '<br />'))
 

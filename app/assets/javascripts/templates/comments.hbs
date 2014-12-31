@@ -5,11 +5,14 @@
       <h5 class="page-user">
         {{#if website}}
           <a href="{{website}}">
-            {{user}} - {{relativeDate pubdate}}
+            {{user}}
           </a>
         {{else}}
-          {{user}} - {{relativeDate pubdate}}
+          {{user}}
         {{/if}}
+        <span class="comment__date">
+          - {{relativeDate pubdate}}
+        </span>
       </h5>
       <div class="font_small">
         <p>{{{replaceReturns content}}}</p>

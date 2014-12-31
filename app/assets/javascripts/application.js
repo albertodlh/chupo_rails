@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require parsley
 //= require parsley.i18n.es
 //= require moment

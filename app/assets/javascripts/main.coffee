@@ -13,7 +13,6 @@ $(()->
   comments = new Chupo.Managers.Comments()
 
   comments.fetch ->
-    console.log comments.collection
     comments.showAll()
   , limit: 10
 
@@ -24,6 +23,7 @@ $(()->
       if success
         comments.fetch ->
           comments.showAll()
+          $("#js-comment-form").trigger('reset')
         , limit: 10
       else
         comments.showErrors()

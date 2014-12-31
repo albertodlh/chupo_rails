@@ -1,7 +1,10 @@
 @SimPL = {}
 
 Array.prototype.blank = () ->
-  (@.length == 0)
+  (@length == 0)
+
+String.prototype.includes = (regexp) ->
+  regexp.test(@toLowerCase())
 
 class SimPL.Manager
   endpoint: ''
@@ -18,7 +21,7 @@ class SimPL.Manager
     endpoint = @endpoint
 
     if options?
-      paramList = Object.keys(options)
+      paramList = _.keys(options) #Object.keys(options)
       if not paramList.blank()
         paramString = '?'
         for param in paramList
