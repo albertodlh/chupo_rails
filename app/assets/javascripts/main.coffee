@@ -10,22 +10,23 @@ $(()->
   $('.js-twitter-date').each (inx, rawDate) ->
     $(rawDate).html(moment($(rawDate).html(), 'YYYY-MM-DD HH:mm:ss Z').fromNow())
 
-  comMgr = new Chupo.Managers.Comments()
+  comments = new Chupo.Managers.Comments()
 
-  comMgr.fetch ()->
-    comMgr.showIn('#js-comments.comments')
+  comments.fetch ->
+    console.log comments.collection
+    comments.showAll()
+  , limit: 10
 
   $("#js-comment-form").on "submit", (evt) ->
     evt.preventDefault()
-    elem = comMgr.createFrom("#js-comment-form")
-    console.log elem
 
-    comMgr.add $(this).serialize(), (success)->
+    comments.add "#js-comment-form", (success) ->
       if success
-        comMgr.fetch ()->
-          comMgr.showIn('#js-comments.comments')
+        comments.fetch ->
+          comments.showAll()
+        , limit: 10
       else
-        alert(comMgr.lastError())
+        comments.showErrors()
 )
 
 
