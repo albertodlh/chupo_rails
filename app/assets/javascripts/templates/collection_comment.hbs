@@ -1,0 +1,20 @@
+<div class="comment">
+  <img alt="{{user}}" src="{{gravatar}}" width="48" height="48">
+  <div class="comment__text">
+    <h5 class="page-user">
+      {{#if website}}
+        <a href="{{website}}">
+          {{user}}
+        </a>
+      {{else}}
+        {{user}}
+      {{/if}}
+      <span class="comment__date">
+        - {{relativeDate pubdate}}
+      </span>
+    </h5>
+    <div class="font_small">
+      <p>{{{replaceReturns content}}}</p>
+    </div>
+  </div>
+</div>

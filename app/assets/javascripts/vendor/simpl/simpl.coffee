@@ -6,15 +6,30 @@ Array.prototype.blank = () ->
 String.prototype.includes = (regexp) ->
   regexp.test(@toLowerCase())
 
+class SimPL.Collection extends Array
+  name: ''
+
+  where: (filter) ->
+    filtered = new SimPL.Collection()
+    filtered = _.where(@, filter)
+    return filtered
+
+
 class SimPL.Manager
   endpoint: ''
   template: ''
   errorsTemplate: ''
   collection: []
   errors: []
+  tempTemplate: null
+  tempContainer: null
+  onAdd: 'prepend'
 
   addError: (text) ->
     @errors.push text
+
+  afterFetch: (item) ->
+    true
 
   fetch: (callback, options) ->
     @collection = []
@@ -29,7 +44,9 @@ class SimPL.Manager
         endpoint += paramString
 
     $.getJSON endpoint, (data) =>
-      @collection = data
+      @collection = data.data
+      @afterFetch(@collection)
+
       callback()
 
   validate: (item) ->
@@ -67,21 +84,63 @@ class SimPL.Manager
       #serial = @serialX(item)
       #console.log $(formId).serialize()
       $.post @endpoint, @serialize(item), (data) =>
-        if data is 'success'
+        if data.success
           success = true
+          item = data.data
+          template = @tempTemplate || @collectionItemTemplate
+          container = @tempContainer || @collectionContainer
+          @addCollectionItem(item, template, container, @onAdd)
+          @tempTemplate = null
+          @tempContainer = null
         else
-          @errors.push data
+          APIerrors = data.errors
+          for error in APIerrors
+            @errors.push error
         callback(success)
+      , 'json'
     else
       callback(success)
 
-  showAll: () ->
-    if $(@collectionContainer)
-      @showIn(@collectionContainer)
+  withTemplate: (template) ->
+    @tempTemplate = template
+    return @
 
-  showIn: (containerId) ->
-    elem = HandlebarsTemplates[@collectionTemplate](@collection)
-    $(containerId).html(elem)
+  inContainer: (containerId) ->
+    @tempContainer = containerId
+    return @
+
+  beforeShow: (item) ->
+    return true
+
+  beforeAppend: (el) ->
+    return true
+
+  afterAppend: (el) ->
+    return true
+
+  addCollectionItem: (item, template, container, type) ->
+    @beforeShow(item)
+    elem = HandlebarsTemplates[template](item)
+    @beforeAppend(elem)
+    if type is 'append'
+      $(container).append(elem)
+    else
+      $(container).prepend(elem)
+    @afterAppend(elem)
+
+
+  showCollection: (filter) ->
+    if $(@collectionContainer)
+      collection = if filter then _.where(@collection, filter) else @collection
+      template = @tempTemplate || @collectionItemTemplate
+      container = @tempContainer || @collectionContainer
+
+      $(container).empty
+      for item in collection
+        @addCollectionItem(item, template, container, 'append')
+
+      @tempTemplate = null
+      @tempContainer = null
 
   showErrors: () ->
     if $(@errorContainer)
