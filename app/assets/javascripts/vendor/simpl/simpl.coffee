@@ -17,13 +17,19 @@ class SimPL.Collection extends Array
 
 class SimPL.Manager
   endpoint: ''
-  template: ''
+  itemTemplate: ''
+  collectionItemTemplate: ''
+  collectionEmptyTemplate: ''
+  collectionContainer: ''
   errorsTemplate: ''
+  errorContainer: ''
   collection: []
   errors: []
   tempTemplate: null
   tempContainer: null
   onAdd: 'prepend'
+  addingItem: false
+  showingEmpty: false
 
   addError: (text) ->
     @errors.push text
@@ -76,30 +82,34 @@ class SimPL.Manager
     return string
 
   add: (formId, callback) ->
-    success = false
-    @errors = []
-    item = @createFrom(formId)
-    @beforeSave(item)
-    if @validate(item)
-      #serial = @serialX(item)
-      #console.log $(formId).serialize()
-      $.post @endpoint, @serialize(item), (data) =>
-        if data.success
-          success = true
-          item = data.data
-          template = @tempTemplate || @collectionItemTemplate
-          container = @tempContainer || @collectionContainer
-          @addCollectionItem(item, template, container, @onAdd)
-          @tempTemplate = null
-          @tempContainer = null
-        else
-          APIerrors = data.errors
-          for error in APIerrors
-            @errors.push error
+    if not @addingItem
+      @addingItem = true
+      success = false
+      @errors = []
+      item = @createFrom(formId)
+      @beforeSave(item)
+      if @validate(item)
+        #serial = @serialX(item)
+        #console.log $(formId).serialize()
+        $.post @endpoint, @serialize(item), (data) =>
+          if data.success
+            success = true
+            item = data.data
+            template = @tempTemplate || @collectionItemTemplate
+            container = @tempContainer || @collectionContainer
+            @addCollectionItem(item, template, container, @onAdd)
+            @tempTemplate = null
+            @tempContainer = null
+          else
+            APIerrors = data.errors
+            for error in APIerrors
+              @errors.push error
+          @addingItem = false
+          callback(success)
+        , 'json'
+      else
+        @addingItem = false
         callback(success)
-      , 'json'
-    else
-      callback(success)
 
   withTemplate: (template) ->
     @tempTemplate = template
@@ -119,28 +129,41 @@ class SimPL.Manager
     return true
 
   addCollectionItem: (item, template, container, type) ->
+    if @showingEmpty
+      @showingEmpty = false
+      $(container).empty()
+
     @beforeShow(item)
-    elem = HandlebarsTemplates[template](item)
-    @beforeAppend(elem)
+    $el = $(HandlebarsTemplates[template](item))
+    @beforeAppend($el)
     if type is 'append'
-      $(container).append(elem)
+      $(container).append($el)
     else
-      $(container).prepend(elem)
-    @afterAppend(elem)
+      $(container).prepend($el)
+    @afterAppend($el)
 
 
   showCollection: (filter) ->
     if $(@collectionContainer)
+      $(container).empty()
       collection = if filter then _.where(@collection, filter) else @collection
-      template = @tempTemplate || @collectionItemTemplate
       container = @tempContainer || @collectionContainer
-
-      $(container).empty
-      for item in collection
-        @addCollectionItem(item, template, container, 'append')
+      if collection.blank()
+        if @collectionEmptyTemplate
+          $el = $(HandlebarsTemplates[@collectionEmptyTemplate]({}))
+          $(container).append($el)
+          @showingEmpty = true
+      else
+        template = @tempTemplate || @collectionItemTemplate
+        for item in collection
+          @addCollectionItem(item, template, container, 'append')
 
       @tempTemplate = null
       @tempContainer = null
+
+  clearErrors: () ->
+    if $(@errorContainer)
+      $(@errorContainer).empty()
 
   showErrors: () ->
     if $(@errorContainer)
@@ -182,7 +205,6 @@ class SimPL.Manager
         curobj[itemname].push(item.value || '')
       else
         curobj[itemname] = item.value || ''
-    console.log obj
     return obj
 
 

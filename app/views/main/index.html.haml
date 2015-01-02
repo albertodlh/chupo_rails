@@ -1,7 +1,7 @@
 .content
   %h1= @main_article ? @main_article.title : "...¡Y Botó el Chupo!"
-  -# .fb-like.like-bar{"data-href" => "http://botoelchupo.com", "data-action" => "like", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
-  -# .g-plusone.like-bar{"data-href" => "http://botoelchupo.com", "data-annotation" => "inline", "data-size" => "tall", "data-width" => "450"}
+  .fb-like.like-bar{"data-href" => "http://botoelchupo.com", "data-action" => "like", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+  .g-plusone.like-bar{"data-href" => "http://botoelchupo.com", "data-annotation" => "inline", "data-size" => "tall", "data-width" => "450"}
 
   - if @main_article
     = raw @main_article.content
@@ -57,18 +57,18 @@
       #js-comment-errors
       .form-group
         = f.label :user, "Nombre"
-        = f.text_field :user, placeholder: "¿Cómo se llama tu nombre?", 'data-parsley-required' => 'true', value: "Alberto"
+        = f.text_field :user, placeholder: "¿Cómo se llama tu nombre?", maxlength: 30, 'data-parsley-required' => 'true', 'data-parsley-length' => '[3, 30]', 'data-parsley-trigger' => 'change'
       .form-group
         = f.label :email, "Email"
-        = f.text_field :email, placeholder: "Opcional. Por si quieres mostrar tu Gravatar.", 'data-parsley-type' => 'email', 'data-parsley-trigger' => 'change'
+        = f.text_field :email, placeholder: "Opcional. Por si quieres mostrar tu Gravatar.", maxlength: 255, 'data-parsley-type' => 'email', 'data-parsley-length' => '[0, 255]', 'data-parsley-trigger' => 'change'
       .form-group
         = f.label :website
-        = f.text_field :website, placeholder: "Opcional. Por si tienes página.", 'data-parsley-type' => 'url', 'data-parsley-trigger' => 'change'
+        = f.text_field :website, placeholder: "Opcional. Por si tienes página.", maxlength: 255, 'data-parsley-type' => 'url', 'data-parsley-length' => '[0, 255]', 'data-parsley-trigger' => 'change'
       .form-group
         = f.label :content, class: "hidden"
-        = f.text_area :content, placeholder: "Escribe aquí tu comentario.", 'data-parsley-required' => 'true', value: "Este es mi comentario"
+        = f.text_area :content, placeholder: "Escribe aquí tu comentario.", maxlength: 1000, 'data-parsley-required' => 'true', 'data-parsley-length' => '[3, 1000]', 'data-parsley-trigger' => 'change'
       .form-group.center
-        = f.submit "Guardar Comentario"
+        = f.submit "Guardar Comentario", class: "btn-fixed-width"
     #js-comments.comments
 
   - if @extra_article

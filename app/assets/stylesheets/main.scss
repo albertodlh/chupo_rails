@@ -33,6 +33,7 @@ body{
 input, textarea, select{
   font-size: 1em;
   padding: 5px 7px;
+  border: 1px solid #000;
 }
 
 .form{
@@ -42,11 +43,32 @@ input, textarea, select{
   margin-bottom: 1em;
 
   input[type=text]{
-    min-width: 350px;
+    width: 350px;
   }
   input[type=submit]{
+    outline: 0;
     -webkit-appearance: none;
-    padding: 5px 15px;
+    background-color: #E14255;
+    color: #EED3D7;
+    padding: 10px 25px 8px 25px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    &:hover{
+      color: #FFF;
+      background-color: #EE5E6B;
+      //border-color: #A7001B;
+    }
+
+    &:disabled{
+      color: #888;
+      background-color: #555;
+    }
+
+    &:active{
+      background-color: #A62F3D;
+      color: #EED3D7;
+    }
   }
   textarea{
     width: 100%;
@@ -61,6 +83,46 @@ input, textarea, select{
     font-weight: 400;
     display: inline-block;
     width: 100px;
+  }
+}
+
+.parsley-error{
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list.filled{
+  opacity: 1;
+}
+
+.parsley-errors-list {
+  opacity: 0;
+  -moz-opacity: 0;
+  -webkit-opacity: 0;
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list, .simpl-error-list{
+  margin: 0;
+  padding: 0;
+  li{
+    margin-top: 10px;
+    list-style-type: none;
+    background-color: #B94A48;
+    color: #EED3D7;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+}
+
+.simpl-error-list{
+  li{
+    margin-top: 0px;
+    margin-bottom: 10px;
   }
 }
 
@@ -142,7 +204,7 @@ h1, h2, h3, h4, h5{
   padding: 1.5em;
   margin-bottom: 1em;
 
-  display: none;
+  // display: none;
 
   h5{
     margin-top: 0;
@@ -184,4 +246,12 @@ h4.title-link{
       text-decoration: underline;
     }
   }
+}
+
+.no-margin{
+  margin: 0;
+}
+
+.btn-fixed-width{
+  width: 200px;
 }

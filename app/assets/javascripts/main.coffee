@@ -5,7 +5,10 @@
       xhr.setRequestHeader('X-CSRF-Token', token)###
 
 $(()->
-  $('#js-comment-form').parsley();
+  pForm = $('#js-comment-form').parsley()
+  $.listen('parsley:field:validate', (algo) ->
+    #pForm.isValid()
+  )
 
   $('.js-twitter-date').each (inx, rawDate) ->
     $(rawDate).html(moment($(rawDate).html(), 'YYYY-MM-DD HH:mm:ss Z').fromNow())
@@ -18,12 +21,20 @@ $(()->
 
   $("#js-comment-form").on "submit", (evt) ->
     evt.preventDefault()
+    $submit = $(@).find(":submit")
+    $submit.prop("disabled", true)
+    submitLabel = $submit.val()
+    $submit.val("Guardando...")
 
     comments.add "#js-comment-form", (success) ->
+      comments.clearErrors()
       if success
-        $("#js-comment-form").trigger('reset')
+        #$("#js-comment-form").trigger('reset')
+        $("#comment_content").val('')
       else
         comments.showErrors()
+      $submit.val(submitLabel)
+      $submit.prop("disabled", false)
 )
 
 
